@@ -1,13 +1,4 @@
 # 🧠 NeuraScan — Early Parkinson's Disease Detection System
-
-**Final Year B.Tech (CSE) Project**  
-G H Raisoni College of Engineering & Management, Nagpur  
-Session: 2025–26 | Guide: Dr. Minakshee Chandankhede
-
-**Team:** Meghana Kokas · Prutha Acharya · Prathmesh Rajurkar · Navneet Lonare · Rugved Salpekar
-
----
-
 ## 📋 Project Overview
 
 NeuraScan is an AI-powered web application for the **early non-invasive detection of Parkinson's Disease** using two digital biomarkers:
@@ -191,33 +182,3 @@ The system is pre-trained on synthetic data. For production, replace with:
 - Keystroke dynamics datasets from literature
 
 ---
-
-## 📊 Key Features
-
-- ✅ Browser-based microphone recording (no software install)
-- ✅ Real-time audio waveform visualizer
-- ✅ Live keystroke dynamics capture with character-by-character feedback
-- ✅ Combined multimodal AI prediction
-- ✅ Confidence scores + risk level (Low/Medium/High)
-- ✅ Interactive charts: Radar, Bar, Line trend
-- ✅ Downloadable PDF medical report
-- ✅ Full test history per user
-- ✅ JWT-secured API
-- ✅ Responsive dark-theme UI
-
----
-
-## ⚠️ Disclaimer
-
-This application is developed for academic research purposes and is intended as a **screening tool only**. It does **not** constitute medical diagnosis. Users showing elevated risk should consult a qualified neurologist for professional evaluation.
-
----
-
-## 📚 References
-
-1. Little et al. (2009). Suitability of dysphonia measurements for telemonitoring of Parkinson's disease. *IEEE TBME, 56(4).*
-2. Santos et al. (2022). Early Detection using Keystroke Dynamics and ML. *IEEE Access.*
-3. Zhang et al. (2022). Deep Learning-Based PD Detection. *Computers in Biology and Medicine, Elsevier.*
-4. Rodriguez et al. (2023). Multimodal Digital Biomarkers for Early PD. *NPJ Digital Medicine, Nature.*
-5. Chatterjee et al. (2024). Explainable AI for PD Detection. *Expert Systems with Applications, Elsevier.*
-6. Lee et al. (2025). AI-Based Digital Biomarkers from Typing. *Artificial Intelligence in Medicine, Elsevier.*
