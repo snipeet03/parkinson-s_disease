@@ -175,10 +175,9 @@ parkinsons-detection/
 - Pause Count
 - Rhythm Consistency (CV of inter-key intervals)
 
-<!-- ### Dataset
+ ### Dataset
 The system is pre-trained on synthetic data. For production, replace with:
 - [UCI Parkinson's Dataset](https://archive.ics.uci.edu/ml/datasets/parkinsons)
 - [Parkinson's Speech Dataset](https://archive.ics.uci.edu/ml/datasets/Parkinson+Speech+Dataset+with++Multiple+Types+of+Sound+Recordings)
 - Keystroke dynamics datasets from literature
 
---- -->
