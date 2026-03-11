@@ -100,6 +100,9 @@ class TypingAnalysisResponse(BaseModel):
 class PredictionRequest(BaseModel):
     voice_analysis_id: Optional[str] = None
     typing_analysis_id: Optional[str] = None
+    # Inline features — used as fallback when DB is unavailable (UUID-format IDs)
+    typing_features: Optional[Dict[str, Any]] = None
+    voice_features: Optional[Dict[str, Any]] = None
 
 class PredictionResult(BaseModel):
     classification: str                                        # "Healthy" or "Parkinson's Risk"

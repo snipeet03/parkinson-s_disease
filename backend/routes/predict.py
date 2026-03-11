@@ -60,10 +60,23 @@ async def make_prediction(request: PredictionRequest):
             oid = ObjectId(request.typing_analysis_id)
             typing_doc = await typing_analyses_collection.find_one({"_id": oid})
         except Exception:
-            pass  # UUID fallback ID — typing_doc stays None, use zero-vector
+            pass  # UUID fallback ID — will try inline features below
 
         if typing_doc:
             tf = typing_doc["features"]
+            typing_array = normalize_typing_features(tf)
+            typing_features_summary = {
+                "typing_speed_wpm":   round(float(tf.get("typing_speed_wpm", 0)), 1),
+                "mean_dwell_time":    round(float(tf.get("mean_dwell_time", 0)), 1),
+                "std_dwell_time":     round(float(tf.get("std_dwell_time", 0)), 1),
+                "mean_flight_time":   round(float(tf.get("mean_flight_time", 0)), 1),
+                "error_rate":         round(float(tf.get("error_rate", 0)) * 100, 2),
+                "rhythm_consistency": round(float(tf.get("rhythm_consistency", 0)) * 100, 1),
+                "pause_count":        int(tf.get("pause_count", 0)),
+            }
+        elif request.typing_features:
+            # DB was unavailable — use inline features passed from the frontend
+            tf = request.typing_features
             typing_array = normalize_typing_features(tf)
             typing_features_summary = {
                 "typing_speed_wpm":   round(float(tf.get("typing_speed_wpm", 0)), 1),

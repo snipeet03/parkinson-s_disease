@@ -20,11 +20,14 @@ async def get_db():
     return db
 
 async def create_indexes():
-    """Create DB indexes on startup."""
-    await users_collection.create_index("email", unique=True)
-    await predictions_collection.create_index("user_id")
-    await voice_analyses_collection.create_index("user_id")
-    await typing_analyses_collection.create_index("user_id")
+    """Create DB indexes on startup. Silently skips if DB is unavailable."""
+    try:
+        await users_collection.create_index("email", unique=True)
+        await predictions_collection.create_index("user_id")
+        await voice_analyses_collection.create_index("user_id")
+        await typing_analyses_collection.create_index("user_id")
+    except Exception as e:
+        print(f"[WARNING] Could not create DB indexes (DB may be unavailable): {e}")
 
 def close_db():
     client.close()

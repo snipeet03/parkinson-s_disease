@@ -7,30 +7,31 @@ import Dashboard from './pages/Dashboard'
 import Navbar from './components/Navbar'
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/"          element={<Landing />} />
-        <Route path="/voice"     element={<VoiceAnalysis />} />
-        <Route path="/typing"    element={<TypingTest />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="*"          element={<Navigate to="/" />} />
-      </Routes>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: '#1f2937',
-            color: '#f1f5f9',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '12px',
-            fontFamily: 'DM Sans, sans-serif',
-          },
-          success: { iconTheme: { primary: '#22c55e', secondary: '#111827' } },
-          error:   { iconTheme: { primary: '#ef4444', secondary: '#111827' } },
-        }}
-      />
-    </BrowserRouter>
-  )
+    return (
+        <BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/voice" element={<VoiceAnalysis />} />
+                <Route path="/typing" element={<TypingTest />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+            <Toaster
+                position="top-right"
+                toastOptions={{
+                    style: {
+                        background: '#1a1a1a',
+                        color: '#e8e8e8',
+                        border: '1px solid #2e2e2e',
+                        borderRadius: '6px',
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: '13px',
+                    },
+                    success: { iconTheme: { primary: '#d4f53c', secondary: '#000' } },
+                    error: { iconTheme: { primary: '#f87171', secondary: '#1a1a1a' } },
+                }}
+            />
+        </BrowserRouter>
+    )
 }
