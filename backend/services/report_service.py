@@ -121,12 +121,13 @@ def generate_pdf_report(prediction_data: Dict[str, Any], user_data: Dict[str, An
 
     voice_score = result.get('voice_risk_score', 0)
     typing_score = result.get('typing_risk_score', 0)
+    combined_score = result.get('combined_risk_score', 0)
 
     biomarker_data = [
         ['Biomarker', 'Score', 'Status'],
         ['Voice Analysis', f"{voice_score}%", get_status(voice_score)],
         ['Typing Dynamics', f"{typing_score}%", get_status(typing_score)],
-        ['Combined Assessment', f"{combined_risk}%", get_status(combined_risk)],
+        ['Combined Assessment', f"{combined_score}%", get_status(combined_score)],
     ]
 
     biomarker_table = Table(biomarker_data, colWidths=[2.5*inch, 1.5*inch, 3.0*inch])

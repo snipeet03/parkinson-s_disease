@@ -191,8 +191,11 @@ def predict(voice_features_array: np.ndarray, typing_features_array: np.ndarray)
     voice_risk  = _compute_voice_risk_score(voice_features_array)
     typing_risk = _compute_typing_risk_score(typing_features_array)
 
+    # Combined risk is the average of voice and typing clinical scores
+    combined_risk = (voice_risk + typing_risk) / 2.0
+
     classification = "Parkinson's Risk" if prediction == 1 else "Healthy"
-    risk_level     = _get_risk_level(pd_prob)
+    risk_level     = _get_risk_level(combined_risk)
 
     return {
         'classification':       classification,
@@ -200,7 +203,7 @@ def predict(voice_features_array: np.ndarray, typing_features_array: np.ndarray)
         'risk_level':           risk_level,
         'voice_risk_score':     round(voice_risk * 100, 1),
         'typing_risk_score':    round(typing_risk * 100, 1),
-        'combined_risk_score':  round(pd_prob * 100, 1),
+        'combined_risk_score':  round(combined_risk * 100, 1),
         'recommendations':      _get_recommendations(risk_level, voice_risk, typing_risk),
         'model_stats':          get_model_stats(),
         'biomarker_flags':      _get_biomarker_flags(voice_features_array, typing_features_array),

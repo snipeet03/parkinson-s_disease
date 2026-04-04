@@ -204,7 +204,6 @@ export default function Dashboard() {
                                                 {[
                                                     { label: 'Voice Risk Score', value: selected.result.voice_risk_score, color: '#4ade80' },
                                                     { label: 'Typing Risk Score', value: selected.result.typing_risk_score, color: '#60a5fa' },
-                                                    { label: 'Combined Risk Score', value: selected.result.combined_risk_score, color: getRiskColor(selected.result.risk_level) },
                                                 ].filter(x => x.value != null).map(({ label, value, color }) => (
                                                     <div key={label}>
                                                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, marginBottom: 4 }}>
