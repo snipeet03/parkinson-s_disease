@@ -50,7 +50,7 @@ pip install -r requirements.txt
 # 3. Copy and configure environment
 cp .env.example .env
 # Edit .env with your MongoDB URL and secret key
-
+venv
 # 4. Train ML model (first time only)
 python init_model.py
 
