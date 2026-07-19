@@ -173,7 +173,7 @@ parkinsons-detection/
 - Error Rate (Levenshtein distance)
 - Backspace Rate
 - Pause Count
-- Rhythm Consistency (CV of inter-key intervals)
+- Rhythm Consistency 
 
  ### Dataset
 The system is pre-trained on synthetic data. For production, replace with:
