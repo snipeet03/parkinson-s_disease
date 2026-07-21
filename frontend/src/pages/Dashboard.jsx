@@ -9,7 +9,6 @@ import { resultsAPI } from '../utils/api'
 import { Link } from 'react-router-dom'
 
 const S = {
-    page: { minHeight: '100vh', background: 'var(--bg)', paddingTop: 88, paddingBottom: 48, paddingLeft: 24, paddingRight: 24 },
     card: { background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 8 },
     labelSmall: { fontSize: 10, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 6 },
 }
@@ -111,16 +110,16 @@ export default function Dashboard() {
     }
 
     return (
-        <div style={S.page}>
+        <div className="px-4 md:px-6 pt-24 pb-12 min-h-screen bg-[var(--bg)]">
             <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 
                 {/* Header */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28 }}>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-7">
                     <div>
                         <h1 style={{ fontSize: 26, fontWeight: 800, color: 'var(--white)', letterSpacing: -1 }}>Results Dashboard</h1>
                         <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>Your AI health screening history</p>
                     </div>
-                    <Link to="/voice" className="btn-secondary" style={{ fontSize: 13, padding: '8px 18px' }}>
+                    <Link to="/voice" className="btn-secondary" style={{ fontSize: 13, padding: '8px 18px', width: 'fit-content' }}>
                         + New Assessment
                     </Link>
                 </div>
@@ -138,7 +137,7 @@ export default function Dashboard() {
                         <Link to="/voice" className="btn-primary">Start Assessment →</Link>
                     </div>
                 ) : (
-                    <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: 20 }}>
+                    <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-5">
 
                         {/* Sidebar */}
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -185,15 +184,15 @@ export default function Dashboard() {
                                     const rs = getRiskStyle(selected.result.risk_level)
                                     return (
                                         <div style={{ ...S.card, padding: 24, border: `1px solid ${rs.border}`, background: rs.bg }}>
-                                            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+                                            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                                                 <div>
-                                                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6, flexWrap: 'wrap' }}>
                                                         <span style={{ fontSize: 16 }}>{selected.result.risk_level === 'Low' ? '✓' : '⚠'}</span>
                                                         <span style={{ fontSize: 22, fontWeight: 800, color: 'var(--white)', letterSpacing: -0.5 }}>{selected.result.classification}</span>
                                                     </div>
                                                     <p style={{ fontSize: 12, color: 'var(--text-dim)' }}>{selected.result.risk_level} Risk · {selected.result.confidence}% Confidence</p>
                                                 </div>
-                                                <div style={{ display: 'flex', gap: 8 }}>
+                                                <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
                                                     <button onClick={() => downloadReport(selected.id)} disabled={downloading} className="btn-secondary" style={{ padding: '6px 14px', fontSize: 12 }}>
                                                         {downloading ? '...' : '⬇ PDF'}
                                                     </button>
@@ -221,7 +220,7 @@ export default function Dashboard() {
                                 })()}
 
                                 {/* Charts */}
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                                     <div style={{ ...S.card, padding: 18 }}>
                                         <div style={S.labelSmall}>Risk Profile</div>
                                         <ResponsiveContainer width="100%" height={200}>
@@ -284,7 +283,7 @@ export default function Dashboard() {
                                 )}
 
                                 {/* Feature tables */}
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                                     {selected.result.voice_features_summary && (
                                         <div style={{ ...S.card, padding: 16 }}>
                                             <div style={{ ...S.labelSmall, color: 'var(--yellow)' }}>Voice Features</div>

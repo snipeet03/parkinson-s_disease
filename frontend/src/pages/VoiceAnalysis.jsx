@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 const RECORDING_TEXT = "The quick brown fox jumps over the lazy dog. Please speak clearly and at a natural pace for about thirty seconds. Say this sentence multiple times if needed to reach the required duration."
 
 const S = {
-    page: { minHeight: '100vh', background: 'var(--bg)', paddingTop: 88, paddingBottom: 48, paddingLeft: 24, paddingRight: 24 },
     center: { maxWidth: 680, margin: '0 auto' },
     iconBox: { width: 56, height: 56, background: 'var(--yellow-dim)', border: '1px solid rgba(212,245,60,0.2)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, margin: '0 auto 18px' },
     h1: { fontSize: 28, fontWeight: 800, color: 'var(--white)', marginBottom: 10, letterSpacing: -1, textAlign: 'center' },
@@ -16,7 +15,6 @@ const S = {
     readingText: { fontSize: 15, color: 'var(--text)', lineHeight: 1.8, fontStyle: 'italic' },
     timer: { fontSize: 32, fontWeight: 800, color: 'var(--white)', letterSpacing: -1, textAlign: 'center', marginBottom: 16, fontFamily: 'var(--font-mono)' },
     recDot: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, fontSize: 12, color: '#f87171', marginTop: 12 },
-    metricGrid: { display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 12 },
 }
 
 export default function VoiceAnalysis() {
@@ -112,7 +110,7 @@ export default function VoiceAnalysis() {
     const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
 
     return (
-        <div style={S.page}>
+        <div className="px-4 md:px-6 pt-24 pb-12 min-h-screen bg-[var(--bg)]">
             <div style={S.center}>
 
                 {/* Header */}
@@ -207,7 +205,7 @@ export default function VoiceAnalysis() {
                             ✓ <strong>Analysis Complete</strong>
                         </div>
 
-                        <div style={S.metricGrid}>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {[
                                 { label: 'Jitter', value: `${analysisResult.features.jitter?.toFixed(3)}%` },
                                 { label: 'Shimmer', value: `${analysisResult.features.shimmer?.toFixed(3)}%` },
@@ -231,7 +229,7 @@ export default function VoiceAnalysis() {
 
                         <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
                             <button onClick={reset} className="btn-secondary" style={{ flex: 1 }}>New Recording</button>
-                            <button onClick={() => navigate('/typing')} className="btn-primary" style={{ flex: 1 }}>
+                            <button onClick={() => navigate('/typing')} className="btn-primary" style={{ flex: 1, justifyContent: 'center' }}>
                                 Next: Typing Test →
                             </button>
                         </div>

@@ -4,7 +4,6 @@ import { typingAPI, predictAPI } from '../utils/api'
 import { useNavigate } from 'react-router-dom'
 
 const S = {
-    page: { minHeight: '100vh', background: 'var(--bg)', paddingTop: 88, paddingBottom: 48, paddingLeft: 24, paddingRight: 24 },
     center: { maxWidth: 720, margin: '0 auto' },
     iconBox: { width: 56, height: 56, background: 'var(--yellow-dim)', border: '1px solid rgba(212,245,60,0.2)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, margin: '0 auto 18px' },
     h1: { fontSize: 28, fontWeight: 800, color: 'var(--white)', marginBottom: 10, letterSpacing: -1, textAlign: 'center' },
@@ -90,8 +89,6 @@ export default function TypingTest() {
             const res = await predictAPI.predict({
                 voice_analysis_id: voiceAnalysisId || null,
                 typing_analysis_id: analysisResult.id,
-                // Pass features inline so prediction works even when DB is unavailable
-                // (UUID-format IDs can't be looked up via ObjectId in MongoDB)
                 typing_features: analysisResult.features,
             })
             setPredResult(res.data)
@@ -114,7 +111,7 @@ export default function TypingTest() {
     }[level] || {})
 
     return (
-        <div style={S.page}>
+        <div className="px-4 md:px-6 pt-24 pb-12 min-h-screen bg-[var(--bg)]">
             <div style={S.center}>
 
                 {/* Header */}
@@ -155,14 +152,14 @@ export default function TypingTest() {
                 {/* Progress bar */}
                 {(testState === 'typing' || testState === 'done') && (
                     <div style={S.card}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                            <div style={{ display: 'flex', gap: 20, fontSize: 12 }}>
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-3">
+                            <div className="flex flex-wrap gap-4 text-xs">
                                 <span style={{ color: 'var(--text-dim)' }}>Progress: <span style={{ color: 'var(--white)', fontWeight: 700 }}>{Math.round(progress)}%</span></span>
                                 <span style={{ color: 'var(--text-dim)' }}>Accuracy: <span style={{ color: accuracy > 90 ? 'var(--yellow)' : '#fbbf24', fontWeight: 700 }}>{accuracy}%</span></span>
                                 <span style={{ color: 'var(--text-dim)' }}>Words: <span style={{ color: 'var(--white)', fontWeight: 700 }}>{wordCount}/{targetWords}</span></span>
                             </div>
                             {testState === 'typing' && (
-                                <button onClick={submitTypingTest} className="btn-primary" style={{ padding: '5px 14px', fontSize: 12 }}>Submit</button>
+                                <button onClick={submitTypingTest} className="btn-primary" style={{ padding: '5px 14px', fontSize: 12, width: 'fit-content' }}>Submit</button>
                             )}
                         </div>
                         <div style={{ height: 4, background: 'var(--border)', borderRadius: 2, overflow: 'hidden' }}>
@@ -208,7 +205,7 @@ export default function TypingTest() {
 
                 {/* Live keystroke stats */}
                 {testState === 'typing' && keystrokes.length > 5 && (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, marginBottom: 16 }}>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">
                         {[
                             { label: 'Keystrokes', value: keystrokes.length },
                             { label: 'Backspaces', value: keystrokes.filter(k => k.key === 'Backspace').length },
@@ -228,7 +225,7 @@ export default function TypingTest() {
                         <div style={{ fontSize: 12, color: '#4ade80', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
                             ✓ <strong>Typing Analysis Complete</strong>
                         </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 10, marginBottom: 16 }}>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-4">
                             {[
                                 { label: 'Typing Speed', value: `${analysisResult.features.typing_speed_wpm?.toFixed(1)} WPM` },
                                 { label: 'Dwell Time', value: `${analysisResult.features.mean_dwell_time?.toFixed(0)}ms` },
@@ -244,7 +241,7 @@ export default function TypingTest() {
                         {!predResult && (
                             <div style={{ display: 'flex', gap: 12 }}>
                                 <button onClick={loadTestText} className="btn-secondary" style={{ flex: 1 }}>↩ Retake</button>
-                                <button onClick={runPrediction} disabled={predicting} className="btn-primary" style={{ flex: 1 }}>
+                                <button onClick={runPrediction} disabled={predicting} className="btn-primary" style={{ flex: 1, justifyContent: 'center' }}>
                                     {predicting
                                         ? <><span style={{ width: 14, height: 14, border: '2px solid rgba(0,0,0,0.2)', borderTopColor: '#000', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.8s linear infinite', marginRight: 8 }} />Analyzing...</>
                                         : '→ Get AI Prediction'}
