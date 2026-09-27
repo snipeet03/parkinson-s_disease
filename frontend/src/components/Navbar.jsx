@@ -62,6 +62,7 @@ export default function Navbar() {
                     ))}
                 </div>
 
+
                 {/* CTA */}
                 <div className="hidden md:block">
                     <Link to="/voice" className="btn-primary" style={{ padding: '6px 18px', fontSize: 13 }}>
